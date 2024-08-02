@@ -19,19 +19,10 @@ export default class ArrayMatch {
     let sorted = false;
     this.iterations = 0;
 
-    // Incrementa iteraciones simuladas
-    const simulateIterations = () => {
-      for (let i = 0; i < 1000; i++) {
-        // Simplemente incrementa una variable para simular trabajo
-        this.iterations++;
-      }
-    };
-
     while (!sorted) {
       sorted = true;
       for (let i = 0; i < n - 1; i++) {
         this.iterations++;
-        simulateIterations(); // Simula trabajo extra
 
         if (this.tornillos[i] > this.tornillos[i + 1]) {
           [this.tornillos[i], this.tornillos[i + 1]] = [this.tornillos[i + 1], this.tornillos[i]];
@@ -57,14 +48,6 @@ export default class ArrayMatch {
     const start = performance.now();
     this.iterations = 0;
 
-    // Incrementa iteraciones simuladas
-    const simulateIterations = () => {
-      for (let i = 0; i < 1000; i++) {
-        // Simplemente incrementa una variable para simular trabajo
-        this.iterations++;
-      }
-    };
-
     const quickSortHelper = (array, left, right) => {
       if (left < right) {
         const pivotIndex = partition(array, left, right);
@@ -78,7 +61,6 @@ export default class ArrayMatch {
       let i = left - 1;
       for (let j = left; j < right; j++) {
         this.iterations++;
-        simulateIterations(); // Simula trabajo extra
 
         if (array[j] < pivot) {
           i++;
@@ -105,14 +87,6 @@ export default class ArrayMatch {
     const start = performance.now();
     this.iterations = 0;
 
-    // Incrementa iteraciones simuladas
-    const simulateIterations = () => {
-      for (let i = 0; i < 1000; i++) {
-        // Simplemente incrementa una variable para simular trabajo
-        this.iterations++;
-      }
-    };
-
     const countingSortHelper = (array) => {
       const max = Math.max(...array);
       const count = new Array(max + 1).fill(0);
@@ -122,14 +96,12 @@ export default class ArrayMatch {
       for (let i = 0; i < array.length; i++) {
         count[array[i]]++;
         this.iterations++;
-        simulateIterations(); // Simula trabajo extra
       }
 
       // Actualización de posiciones
       for (let i = 1; i < count.length; i++) {
         count[i] += count[i - 1];
         this.iterations++;
-        simulateIterations(); // Simula trabajo extra
       }
 
       // Construcción del array ordenado
@@ -137,7 +109,6 @@ export default class ArrayMatch {
         output[count[array[i]] - 1] = array[i];
         count[array[i]]--;
         this.iterations++;
-        simulateIterations(); // Simula trabajo extra
       }
 
       return output;
