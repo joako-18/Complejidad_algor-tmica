@@ -1,3 +1,4 @@
+// script.mjs
 import ArrayMatch from '../models/box.mjs';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -29,18 +30,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const arrayMatchBubble = new ArrayMatch();
     const arrayMatchQuick = new ArrayMatch();
-    const arrayMatchCounting = new ArrayMatch();
+    const arrayMatchLinear = new ArrayMatch();
 
     // Inserta tornillos y tuercas en las instancias correspondientes
     tornillos.forEach(t => {
       arrayMatchBubble.insertTornillo(t);
       arrayMatchQuick.insertTornillo(t);
-      arrayMatchCounting.insertTornillo(t);
+      arrayMatchLinear.insertTornillo(t);
     });
     tuercas.forEach(t => {
       arrayMatchBubble.insertTuerca(t);
       arrayMatchQuick.insertTuerca(t);
-      arrayMatchCounting.insertTuerca(t);
+      arrayMatchLinear.insertTuerca(t);
     });
 
     // Ejecuta el ordenamiento de burbuja y captura el resultado
@@ -51,9 +52,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let quickResult = arrayMatchQuick.quickSort();
     console.log('Quick Sort Result:', quickResult);
 
-    // Ejecuta el ordenamiento por conteo y captura el resultado
-    let countingResult = arrayMatchCounting.countingSort();
-    console.log('Counting Sort Result:', countingResult);
+    // Ejecuta el emparejamiento lineal y captura el resultado
+    let linearResult = arrayMatchLinear.matchNutsAndBolts();
+    console.log('Matching Result:', linearResult);
 
     // Muestra resultados para Bubble Sort
     document.getElementById('bubbleSortedTornillos').textContent = `Bubble Sort - Tornillos Ordenados: ${bubbleResult.tornillos.join(', ')}`;
@@ -67,18 +68,18 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('quickIterations').textContent = `Quick Sort - Iteraciones: ${quickResult.iterations}`;
     document.getElementById('quickTimeTaken').textContent = `Quick Sort - Tiempo Tomado: ${quickResult.timeTaken.toFixed(2)} ms`;
 
-    // Muestra resultados para Counting Sort
-    document.getElementById('countingSortedTornillos').textContent = `Counting Sort - Tornillos Ordenados: ${countingResult.tornillos.join(', ')}`;
-    document.getElementById('countingSortedTuercas').textContent = `Counting Sort - Tuercas Ordenadas: ${countingResult.tuercas.join(', ')}`;
-    document.getElementById('countingIterations').textContent = `Counting Sort - Iteraciones: ${countingResult.iterations}`;
-    document.getElementById('countingTimeTaken').textContent = `Counting Sort - Tiempo Tomado: ${countingResult.timeTaken.toFixed(2)} ms`;
+    // Muestra resultados para el emparejamiento lineal
+    document.getElementById('linearMatchedTornillos').textContent = `Matching - Tornillos Ordenados: ${linearResult.tornillos.join(', ')}`;
+    document.getElementById('linearMatchedTuercas').textContent = `Matching - Tuercas Ordenadas: ${linearResult.tuercas.join(', ')}`;
+    document.getElementById('linearIterations').textContent = `Matching - Iteraciones: ${linearResult.iterations}`;
+    document.getElementById('linearTimeTaken').textContent = `Matching - Tiempo Tomado: ${linearResult.timeTaken.toFixed(2)} ms`;
   });
 });
 
 function generateUniqueRandomArray(size) {
   const array = [];
   while (array.length < size) {
-    const num = Math.floor(Math.random() * 100000) + 1;
+    const num = Math.floor(Math.random() * 1000000);
     if (!array.includes(num)) {
       array.push(num);
     }

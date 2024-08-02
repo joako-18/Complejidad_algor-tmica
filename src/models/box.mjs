@@ -1,3 +1,4 @@
+// box.mjs
 export default class ArrayMatch {
   constructor() {
     this.tornillos = [];
@@ -83,41 +84,20 @@ export default class ArrayMatch {
     };
   }
 
-  countingSort() {
+  matchNutsAndBolts() {
     const start = performance.now();
     this.iterations = 0;
 
-    const countingSortHelper = (array) => {
-      const max = Math.max(...array);
-      const count = new Array(max + 1).fill(0);
-      const output = new Array(array.length);
+    const matchDict = {};
+    this.tornillos.forEach((tornillo, index) => {
+      matchDict[tornillo] = this.tuercas[index];
+      this.iterations++;
+    });
 
-      // Conteo de ocurrencias
-      for (let i = 0; i < array.length; i++) {
-        count[array[i]]++;
-        this.iterations++;
-      }
+    this.tornillos = Object.keys(matchDict).map(Number);
+    this.tuercas = Object.values(matchDict);
 
-      // Actualización de posiciones
-      for (let i = 1; i < count.length; i++) {
-        count[i] += count[i - 1];
-        this.iterations++;
-      }
-
-      // Construcción del array ordenado
-      for (let i = array.length - 1; i >= 0; i--) {
-        output[count[array[i]] - 1] = array[i];
-        count[array[i]]--;
-        this.iterations++;
-      }
-
-      return output;
-    };
-
-    this.tornillos = countingSortHelper(this.tornillos);
-    this.tuercas = countingSortHelper(this.tuercas);
     const end = performance.now();
-
     return {
       tornillos: this.tornillos,
       tuercas: this.tuercas,
