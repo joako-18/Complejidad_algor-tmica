@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function generateUniqueRandomArray(size) {
   const array = [];
   while (array.length < size) {
-    const num = Math.floor(Math.random() * 100) + 1; // Números entre 1 y 100
+    const num = Math.floor(Math.random() * 100000) + 1;
     if (!array.includes(num)) {
       array.push(num);
     }
