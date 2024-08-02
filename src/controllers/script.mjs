@@ -1,4 +1,3 @@
-// script.mjs
 import ArrayMatch from '../models/box.mjs';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -7,6 +6,52 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let tornillos = [];
   let tuercas = [];
+
+  // Inicializa los gráficos
+  const ctxIterations = document.getElementById('iterationsChart').getContext('2d');
+  const ctxTime = document.getElementById('timeChart').getContext('2d');
+
+  const iterationsChart = new Chart(ctxIterations, {
+    type: 'bar',
+    data: {
+      labels: ['Bubble Sort', 'Quick Sort', 'Matching'],
+      datasets: [{
+        label: 'Número de Iteraciones',
+        data: [0, 0, 0],
+        backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)'],
+        borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)'],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+
+  const timeChart = new Chart(ctxTime, {
+    type: 'bar',
+    data: {
+      labels: ['Bubble Sort', 'Quick Sort', 'Matching'],
+      datasets: [{
+        label: 'Tiempo (ms)',
+        data: [0, 0, 0],
+        backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)'],
+        borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)'],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
 
   generateButton.addEventListener('click', () => {
     const size = parseInt(document.getElementById('arraySize').value, 10);
@@ -56,23 +101,20 @@ document.addEventListener('DOMContentLoaded', () => {
     let linearResult = arrayMatchLinear.matchNutsAndBolts();
     console.log('Matching Result:', linearResult);
 
-    // Muestra resultados para Bubble Sort
-    document.getElementById('bubbleSortedTornillos').textContent = `Bubble Sort - Tornillos Ordenados: ${bubbleResult.tornillos.join(', ')}`;
-    document.getElementById('bubbleSortedTuercas').textContent = `Bubble Sort - Tuercas Ordenadas: ${bubbleResult.tuercas.join(', ')}`;
-    document.getElementById('bubbleIterations').textContent = `Bubble Sort - Iteraciones: ${bubbleResult.iterations}`;
-    document.getElementById('bubbleTimeTaken').textContent = `Bubble Sort - Tiempo Tomado: ${bubbleResult.timeTaken.toFixed(2)} ms`;
+    // Actualiza los gráficos con los resultados
+    iterationsChart.data.datasets[0].data = [
+      bubbleResult.iterations,
+      quickResult.iterations,
+      linearResult.iterations
+    ];
+    iterationsChart.update();
 
-    // Muestra resultados para Quick Sort
-    document.getElementById('quickSortedTornillos').textContent = `Quick Sort - Tornillos Ordenados: ${quickResult.tornillos.join(', ')}`;
-    document.getElementById('quickSortedTuercas').textContent = `Quick Sort - Tuercas Ordenadas: ${quickResult.tuercas.join(', ')}`;
-    document.getElementById('quickIterations').textContent = `Quick Sort - Iteraciones: ${quickResult.iterations}`;
-    document.getElementById('quickTimeTaken').textContent = `Quick Sort - Tiempo Tomado: ${quickResult.timeTaken.toFixed(2)} ms`;
-
-    // Muestra resultados para el emparejamiento lineal
-    document.getElementById('linearMatchedTornillos').textContent = `Matching - Tornillos Ordenados: ${linearResult.tornillos.join(', ')}`;
-    document.getElementById('linearMatchedTuercas').textContent = `Matching - Tuercas Ordenadas: ${linearResult.tuercas.join(', ')}`;
-    document.getElementById('linearIterations').textContent = `Matching - Iteraciones: ${linearResult.iterations}`;
-    document.getElementById('linearTimeTaken').textContent = `Matching - Tiempo Tomado: ${linearResult.timeTaken.toFixed(2)} ms`;
+    timeChart.data.datasets[0].data = [
+      bubbleResult.timeTaken.toFixed(2),
+      quickResult.timeTaken.toFixed(2),
+      linearResult.timeTaken.toFixed(2)
+    ];
+    timeChart.update();
   });
 });
 

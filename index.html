@@ -14,30 +14,12 @@
     <button type="submit">Ordenar</button>
   </form>
 
-  <div id="bubbleResult">
-    <h3>Resultados Bubble Sort</h3>
-    <p id="bubbleSortedTornillos"></p>
-    <p id="bubbleSortedTuercas"></p>
-    <p id="bubbleIterations"></p>
-    <p id="bubbleTimeTaken"></p>
+  <div id="results">
+    <canvas id="iterationsChart" width="400" height="200"></canvas>
+    <canvas id="timeChart" width="400" height="200"></canvas>
   </div>
 
-  <div id="quickResult">
-    <h3>Resultados Quick Sort</h3>
-    <p id="quickSortedTornillos"></p>
-    <p id="quickSortedTuercas"></p>
-    <p id="quickIterations"></p>
-    <p id="quickTimeTaken"></p>
-  </div>
-
-  <div id="linearResult">
-    <h3>Resultados Matching</h3>
-    <p id="linearMatchedTornillos"></p>
-    <p id="linearMatchedTuercas"></p>
-    <p id="linearIterations"></p>
-    <p id="linearTimeTaken"></p>
-  </div>
-
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script type="module" src="./src/controllers/script.mjs"></script>
 </body>
 </html>
