@@ -21,7 +21,7 @@ export default class ArrayMatch {
 
     // Incrementa iteraciones simuladas
     const simulateIterations = () => {
-      for (let i = 0; i < 10000; i++) {
+      for (let i = 0; i < 1000; i++) {
         // Simplemente incrementa una variable para simular trabajo
         this.iterations++;
       }
@@ -59,7 +59,7 @@ export default class ArrayMatch {
 
     // Incrementa iteraciones simuladas
     const simulateIterations = () => {
-      for (let i = 0; i < 10000; i++) {
+      for (let i = 0; i < 1000; i++) {
         // Simplemente incrementa una variable para simular trabajo
         this.iterations++;
       }
@@ -91,6 +91,60 @@ export default class ArrayMatch {
 
     quickSortHelper(this.tornillos, 0, this.tornillos.length - 1);
     quickSortHelper(this.tuercas, 0, this.tuercas.length - 1);
+    const end = performance.now();
+
+    return {
+      tornillos: this.tornillos,
+      tuercas: this.tuercas,
+      iterations: this.iterations,
+      timeTaken: end - start
+    };
+  }
+
+  countingSort() {
+    const start = performance.now();
+    this.iterations = 0;
+
+    // Incrementa iteraciones simuladas
+    const simulateIterations = () => {
+      for (let i = 0; i < 1000; i++) {
+        // Simplemente incrementa una variable para simular trabajo
+        this.iterations++;
+      }
+    };
+
+    const countingSortHelper = (array) => {
+      const max = Math.max(...array);
+      const count = new Array(max + 1).fill(0);
+      const output = new Array(array.length);
+
+      // Conteo de ocurrencias
+      for (let i = 0; i < array.length; i++) {
+        count[array[i]]++;
+        this.iterations++;
+        simulateIterations(); // Simula trabajo extra
+      }
+
+      // Actualización de posiciones
+      for (let i = 1; i < count.length; i++) {
+        count[i] += count[i - 1];
+        this.iterations++;
+        simulateIterations(); // Simula trabajo extra
+      }
+
+      // Construcción del array ordenado
+      for (let i = array.length - 1; i >= 0; i--) {
+        output[count[array[i]] - 1] = array[i];
+        count[array[i]]--;
+        this.iterations++;
+        simulateIterations(); // Simula trabajo extra
+      }
+
+      return output;
+    };
+
+    this.tornillos = countingSortHelper(this.tornillos);
+    this.tuercas = countingSortHelper(this.tuercas);
     const end = performance.now();
 
     return {

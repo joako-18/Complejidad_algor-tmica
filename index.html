@@ -7,6 +7,8 @@
 </head>
 <body>
   <form id="matchForm">
+    <label for="arraySize">Tamaño del arreglo:</label>
+    <input type="number" id="arraySize" min="1" required>
     <button type="button" id="generateArrays">Generar Arreglos</button>
     <button type="submit">Ordenar</button>
   </form>
@@ -25,6 +27,14 @@
     <p id="quickSortedTuercas"></p>
     <p id="quickIterations"></p>
     <p id="quickTimeTaken"></p>
+  </div>
+
+  <div id="countingResult">
+    <h3>Resultados Counting Sort</h3>
+    <p id="countingSortedTornillos"></p>
+    <p id="countingSortedTuercas"></p>
+    <p id="countingIterations"></p>
+    <p id="countingTimeTaken"></p>
   </div>
 
   <script type="module" src="./src/controllers/script.mjs"></script>
