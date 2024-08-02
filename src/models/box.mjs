@@ -21,7 +21,7 @@ export default class ArrayMatch {
 
     // Incrementa iteraciones simuladas
     const simulateIterations = () => {
-      for (let i = 0; i < 1000000; i++) {
+      for (let i = 0; i < 10000; i++) {
         // Simplemente incrementa una variable para simular trabajo
         this.iterations++;
       }
@@ -59,7 +59,7 @@ export default class ArrayMatch {
 
     // Incrementa iteraciones simuladas
     const simulateIterations = () => {
-      for (let i = 0; i < 1000000; i++) {
+      for (let i = 0; i < 10000; i++) {
         // Simplemente incrementa una variable para simular trabajo
         this.iterations++;
       }
